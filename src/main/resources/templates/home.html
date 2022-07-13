@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
+    <script>
+      var sound = new Howl({
+        src: [
+          "https://upload.wikimedia.org/wikipedia/commons/e/e1/It-Roma.ogg",
+        ],
+        volume: 1.0,
+        onend: function () {},
+      });
+      var bg = false;
+
+      function mudarFundo() {
+        var conteudo = document.getElementById("container");
+        if (bg) {
+          conteudo.style.backgroundImage =
+            "  -webkit-gradient( linear, left bottom, left top, color-stop(0.33, rgb(60, 60, 63)), color-stop(0.67, rgb(22, 22, 22)) )";
+        } else {
+          conteudo.style.backgroundImage =
+            'url("https://wallpaperaccess.com/full/3237612.jpg")';
+          sound.play();
+        }
+        bg = !bg;
+      }
+    </script>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        height: 1vw;
+        background-color: #323232;
+        color: #efefff;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+        font-size: 17px;
+      }
+      #conteudo {
+        background-size: 108vw;
+        background-repeat: space;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      a {
+        color: #3bb7ff;
+      }
+      .descricao {
+        max-width: 500px;
+        word-wrap: normal;
+      }
+      #container {
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: column;
+        height: 99vh;
+        background-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0.33, rgb(59, 59, 59)),
+          color-stop(0.67, rgb(29, 29, 29))
+        );
+        background-size: cover;
+        padding: 2px;
+      }
+      .produto {
+        padding: 1rem;
+      }
+      #informacoes {
+        padding: 1rem;
+        line-height: 1.4;
+        height: fit-content;
+        align-self: center;
+        background-color: rgba(0, 2, 2, 0.377);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(3.8px);
+        -webkit-backdrop-filter: blur(5.8px);
+        border: 1px solid rgba(17, 17, 17, 0.3);
+        border-radius: 5px;
+        word-break: break-all;
+        max-width: 51vw;
+      }
+
+      input {
+        font-size: 19px;
+        color: #fff;
+        border-radius: 3px;
+        border: 2px solid #ccc;
+        background-color: transparent;
+        width: 97%;
+      }
+      input:focus {
+        outline: none;
+      }
+
+      button {
+        display: block;
+        width: 100%;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-top: 0.3rem;
+        text-decoration: none;
+        background: #03428f;
+        color: #ffffff;
+        font-family: sans-serif;
+        font-size: 1rem;
+        cursor: pointer;
+        text-align: center;
+        transition: background 250ms ease-in-out, transform 150ms ease;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        border-radius: 3px;
+      }
+
+      button:hover,
+      button:focus {
+        background: #0053ba;
+      }
+
+      button:active {
+        transform: scale(0.99);
+      }
+      #bgChange {
+        font-size: 17px;
+        margin-top: 10px;
+        display: block;
+        padding: 4px;
+        background-color: rgba(0, 2, 2, 0.233);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(3.8px);
+        -webkit-backdrop-filter: blur(5.8px);
+        border: 1px solid rgba(17, 17, 17, 0.3);
+        border-radius: 3px;
+        width: 100px;
+      }
+      #bgChange:hover {
+        background-color: rgba(0, 2, 2, 0.63);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body name="body">
+    <div id="conteudo">
+      <div id="container">
+        <div id="informacoes">
+          <b> Resultado: </b>
+          <div th:text="${resultado}"></div>
+          <form action="/api" method="post">
+            <input name="valor" type="text" /> <br />
+            <button type="submit">Decimal &harr; Romano</button>
+          </form>
+          <div id="bgChange" onclick="mudarFundo()">Mudar Fundo</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
